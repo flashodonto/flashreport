@@ -4,18 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FlashReport – Gerador de Relatórios</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --yellow: #FFD600;
-    --yellow-dark: #E6C000;
-    --bg: #0e0e0f;
-    --bg2: #161618;
-    --bg3: #1e1e21;
-    --border: #2a2a2e;
+    --yellow-dark: #ccab00;
+    --bg: #0c0c0c;
+    --card: #141414;
+    --card2: #1a1a1a;
+    --border: rgba(255,214,0,0.15);
+    --border-dim: rgba(255,255,255,0.07);
     --text: #f0f0f0;
-    --muted: #888;
-    --card-bg: #18181b;
+    --muted: #666;
+    --muted2: #999;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,105 +28,80 @@
     min-height: 100vh;
   }
 
-  /* ── LOGIN ── */
+  /* ─── LOGIN ─── */
   #login-screen {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at 60% 20%, #2a2500 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, #1a1a00 0%, transparent 50%),
-                var(--bg);
-    padding: 20px;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 10%, rgba(180,140,0,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 90%, rgba(100,80,0,0.12) 0%, transparent 60%),
+      #0c0c0c;
+    padding: 24px;
   }
 
   .login-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 36px;
-    animation: fadeDown 0.6s ease both;
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 32px;
+    animation: fadeDown 0.5s ease both;
   }
 
-  .login-logo .icon-wrap {
+  .icon-box {
     width: 64px; height: 64px;
-    background: var(--yellow);
+    background: linear-gradient(145deg, #FFD600, #e6b800);
     border-radius: 18px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 30px;
-    margin-bottom: 14px;
-    box-shadow: 0 0 40px rgba(255,214,0,0.3);
+    font-size: 28px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 32px rgba(255,214,0,0.35), 0 2px 8px rgba(0,0,0,0.5);
   }
 
   .login-logo h1 {
     font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 28px; font-weight: 800;
     letter-spacing: -0.5px;
+    color: #fff;
   }
-
   .login-logo h1 span { color: var(--yellow); }
-
-  .login-logo p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
+  .login-logo p { font-size: 13px; color: var(--muted2); margin-top: 4px; }
 
   .login-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
+    background: #161618;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 40px 36px;
+    padding: 36px 32px 28px;
+    width: 100%; max-width: 400px;
+    animation: fadeUp 0.5s ease 0.1s both;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  }
+
+  .login-card h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .login-card > p { font-size: 13px; color: var(--muted2); margin-bottom: 28px; }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted2); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  .field input, .field select {
     width: 100%;
-    max-width: 420px;
-    animation: fadeUp 0.6s ease 0.1s both;
-  }
-
-  .login-card h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .login-card p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 28px;
-  }
-
-  .field-group {
-    margin-bottom: 18px;
-  }
-
-  .field-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #ccc;
-  }
-
-  .field-group input, .field-group select {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
+    background: #0e0e10;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 13px 16px;
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-
-  .field-group input:focus, .field-group select:focus {
+  .field input:focus, .field select:focus {
     border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(255,214,0,0.08);
   }
+  .field input::placeholder { color: #333; }
 
-  .btn-primary {
+  .btn-yellow {
     width: 100%;
     background: var(--yellow);
     color: #111;
@@ -133,26 +109,18 @@
     border-radius: 10px;
     padding: 14px;
     font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 15px; font-weight: 800;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 8px;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    margin-top: 4px;
+    letter-spacing: -0.2px;
   }
+  .btn-yellow:hover { background: #f0c800; box-shadow: 0 4px 20px rgba(255,214,0,0.3); }
+  .btn-yellow:active { transform: scale(0.98); }
 
-  .btn-primary:hover { background: var(--yellow-dark); }
-  .btn-primary:active { transform: scale(0.98); }
-
-  .login-footer {
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .error-msg {
-    background: rgba(255,60,60,0.1);
-    border: 1px solid rgba(255,60,60,0.3);
+  .error-box {
+    background: rgba(255,60,60,0.08);
+    border: 1px solid rgba(255,60,60,0.25);
     color: #ff6b6b;
     border-radius: 8px;
     padding: 10px 14px;
@@ -161,361 +129,280 @@
     display: none;
   }
 
-  /* ── APP ── */
-  #app-screen { display: none; }
+  .login-foot { font-size: 11px; color: var(--muted); text-align: center; margin-top: 20px; }
+
+  /* ─── APP ─── */
+  #app-screen { display: none; min-height: 100vh; }
 
   .topbar {
-    background: var(--card-bg);
-    border-bottom: 1px solid var(--border);
+    height: 58px;
+    background: rgba(14,14,14,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,214,0,0.1);
+    display: flex; align-items: center; justify-content: space-between;
     padding: 0 32px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
   }
 
-  .topbar-logo {
+  .topbar-brand {
     display: flex; align-items: center; gap: 10px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
   }
-
-  .topbar-logo .icon-sm {
-    width: 32px; height: 32px;
+  .topbar-brand .icon-sm {
+    width: 30px; height: 30px;
     background: var(--yellow);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
   }
+  .topbar-brand span { color: var(--yellow); }
 
-  .topbar-logo span { color: var(--yellow); }
-
-  .btn-logout {
+  .btn-ghost {
     background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--muted2);
     border-radius: 8px;
     padding: 7px 14px;
-    font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
   }
+  .btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
 
-  .btn-logout:hover { border-color: var(--yellow); color: var(--yellow); }
-
-  .main-content {
-    max-width: 960px;
+  .page {
+    max-width: 900px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 44px 24px 80px;
   }
 
-  .section-title {
+  .page-title {
     font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 6px;
+    font-size: 24px; font-weight: 800;
+    margin-bottom: 4px;
   }
+  .page-title span { color: var(--yellow); }
+  .page-sub { font-size: 13px; color: var(--muted2); margin-bottom: 36px; }
 
-  .section-title span { color: var(--yellow); }
-
-  .section-sub {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 32px;
-  }
-
-  .form-card {
-    background: var(--card-bg);
+  /* FORM CARDS */
+  .form-block {
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 20px;
+    padding: 24px 24px 20px;
+    margin-bottom: 16px;
   }
 
-  .form-card-title {
+  .block-title {
     font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 11px; font-weight: 700;
     color: var(--yellow);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .block-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,214,0,0.12);
   }
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 
-  .form-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .field-group input::placeholder { color: #444; }
+  .divider { height: 1px; background: var(--border-dim); margin: 20px 0; }
 
   .btn-generate {
     width: 100%;
     background: var(--yellow);
     color: #111;
     border: none;
-    border-radius: 12px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 18px;
     font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
+    font-size: 17px; font-weight: 800;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    letter-spacing: -0.3px;
+    transition: all 0.2s;
     margin-top: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 0 0 rgba(255,214,0,0);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
+  .btn-generate:hover { background: #f0c800; box-shadow: 0 8px 32px rgba(255,214,0,0.25); }
+  .btn-generate:active { transform: scale(0.99); }
 
-  .btn-generate:hover {
-    background: var(--yellow-dark);
-    box-shadow: 0 0 30px rgba(255,214,0,0.2);
-  }
-
-  .btn-generate:active { transform: scale(0.98); }
-
-  .btn-reset {
+  .btn-clear {
     width: 100%;
     background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 13px;
+    border: 1px solid var(--border-dim);
+    color: var(--muted2);
+    border-radius: 14px;
+    padding: 14px;
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
     margin-top: 10px;
   }
+  .btn-clear:hover { border-color: rgba(255,255,255,0.15); color: #ccc; }
 
-  .btn-reset:hover { border-color: var(--muted); color: var(--text); }
+  /* ─── REPORT ─── */
+  #report-wrap { display: none; margin-top: 56px; }
 
-  /* ── REPORT ── */
-  #report-section { display: none; margin-top: 48px; }
-
-  .report-wrap {
-    background: #0d0d0d;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-  }
-
-  .report-inner {
-    background: #111;
-    padding: 40px 36px 32px;
-  }
-
-  .report-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .report-header h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--yellow);
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-  }
-
-  .report-top-badges {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .badge-top {
-    background: var(--yellow);
-    color: #111;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    text-align: center;
-    min-width: 180px;
-  }
-
-  .badge-top .badge-label { font-size: 11px; font-weight: 600; margin-bottom: 3px; opacity: 0.7; }
-  .badge-top .badge-value { font-size: 16px; font-weight: 800; }
-
-  .report-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
+  .report-divider {
+    display: flex; align-items: center; gap: 16px;
     margin-bottom: 28px;
   }
+  .report-divider span {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    white-space: nowrap;
+  }
+  .report-divider span em { color: var(--yellow); font-style: normal; }
+  .report-divider::before, .report-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,214,0,0.2), transparent);
+  }
 
-  .report-col-title {
+  .report-box {
+    background: #111;
+    border: 1px solid rgba(255,214,0,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(255,214,0,0.05);
+  }
+
+  .report-body { padding: 40px 36px 32px; }
+
+  .report-head { text-align: center; margin-bottom: 40px; }
+  .report-head h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--yellow);
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-thickness: 2px;
+    margin-bottom: 24px;
+  }
+
+  .head-badges {
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+  }
+
+  .badge-pill {
+    background: var(--yellow);
+    color: #111;
+    border-radius: 12px;
+    padding: 12px 22px;
+    min-width: 170px;
+    text-align: center;
+  }
+  .badge-pill .bp-label { font-size: 10px; font-weight: 700; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .badge-pill .bp-val { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; }
+
+  .report-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+
+  .col-head {
     background: var(--yellow);
     color: #111;
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 9px 12px;
     font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 13px;
+    font-weight: 800; font-size: 12px;
     text-align: center;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
   }
 
-  .report-metric-card {
-    background: #1a1a1a;
-    border: 1.5px solid #2e2e2e;
+  .metric-card {
+    background: #191919;
+    border: 1px solid rgba(255,255,255,0.06);
     border-radius: 10px;
     padding: 14px 16px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
+    transition: border-color 0.2s;
   }
+  .metric-card:hover { border-color: rgba(255,214,0,0.2); }
+  .metric-card .mc-label { font-size: 11px; font-weight: 600; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .mc-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; }
 
-  .report-metric-card .m-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #bbb;
-    margin-bottom: 6px;
-  }
-
-  .report-metric-card .m-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-  }
-
-  .report-footer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    border-top: 1px solid #222;
+  .report-footer-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
     padding-top: 24px;
-    margin-top: 8px;
   }
 
-  .footer-card {
-    background: #1a1a1a;
-    border: 1.5px solid #2e2e2e;
-    border-radius: 10px;
-    padding: 14px 12px;
+  .footer-metric {
+    background: #191919;
+    border: 1px solid rgba(255,214,0,0.12);
+    border-radius: 12px;
+    padding: 16px 12px;
     text-align: center;
   }
-
-  .footer-card .f-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: #bbb;
-    margin-bottom: 6px;
-  }
-
-  .footer-card .f-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 800;
-    color: var(--yellow);
-  }
+  .footer-metric .fm-label { font-size: 10px; font-weight: 600; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .footer-metric .fm-val { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--yellow); }
 
   .report-actions {
-    display: flex;
-    gap: 12px;
-    padding: 20px 36px;
-    border-top: 1px solid #222;
+    display: flex; gap: 12px;
+    padding: 18px 36px;
+    border-top: 1px solid rgba(255,255,255,0.05);
     background: #0d0d0d;
   }
 
   .btn-print {
-    background: var(--yellow);
-    color: #111;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 24px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
+    background: var(--yellow); color: #111;
+    border: none; border-radius: 10px;
+    padding: 11px 22px;
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
     display: flex; align-items: center; gap: 6px;
-    transition: background 0.2s;
   }
+  .btn-print:hover { background: #f0c800; }
 
-  .btn-print:hover { background: var(--yellow-dark); }
-
-  .btn-new {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
+  .btn-new-report {
+    background: transparent; color: var(--muted2);
+    border: 1px solid var(--border-dim);
+    border-radius: 10px; padding: 11px 22px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    cursor: pointer; transition: all 0.2s;
   }
+  .btn-new-report:hover { border-color: var(--yellow); color: var(--yellow); }
 
-  .btn-new:hover { border-color: var(--yellow); color: var(--yellow); }
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:translateY(0); } }
+  @keyframes slideIn  { from { opacity:0; transform:translateY(24px);  } to { opacity:1; transform:translateY(0); } }
+  .slide-in { animation: slideIn 0.4s ease both; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .anim-in { animation: fadeIn 0.5s ease both; }
-
-  /* ── PRINT ── */
+  /* ─── PRINT ─── */
   @media print {
+    .topbar, .page-title, .page-sub, .form-block, .btn-generate, .btn-clear, .report-divider, .report-actions { display: none !important; }
+    #report-wrap { display: block !important; margin-top: 0; }
     body { background: #111; }
-    .topbar, .main-content > *:not(#report-section),
-    .report-actions, #report-section { display: block !important; }
-    .topbar, .section-title, .section-sub, .form-card, .btn-generate, .btn-reset { display: none !important; }
-    .report-wrap { border: none; }
+    .report-box { border: none; box-shadow: none; }
   }
 
-  @media (max-width: 700px) {
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 720px) {
+    .grid-2, .grid-3, .grid-5 { grid-template-columns: 1fr 1fr; }
     .report-cols { grid-template-columns: 1fr; }
-    .report-footer { grid-template-columns: 1fr 1fr; }
-    .form-grid-2 { grid-template-columns: 1fr; }
-    .report-top-badges { flex-direction: column; align-items: center; }
+    .report-footer-row { grid-template-columns: 1fr 1fr; }
     .topbar { padding: 0 16px; }
-    .main-content { padding: 24px 16px; }
-    .report-inner { padding: 24px 16px; }
-    .report-actions { padding: 16px; flex-direction: column; }
+    .page { padding: 28px 16px 60px; }
+    .report-body { padding: 24px 16px; }
+    .report-actions { padding: 14px 16px; flex-direction: column; }
+    .head-badges { flex-direction: column; align-items: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════ LOGIN ═══════════════════════════════ -->
+<!-- ══════════════════ LOGIN ══════════════════ -->
 <div id="login-screen">
   <div class="login-logo">
-    <div class="icon-wrap">⚡</div>
+    <div class="icon-box">⚡</div>
     <h1>Flash<span>Report</span></h1>
     <p>Gerador de Relatórios de Tráfego Pago</p>
   </div>
@@ -524,44 +411,42 @@
     <h2>Bem-vindo de volta</h2>
     <p>Insira sua senha para acessar o sistema</p>
 
-    <div id="login-error" class="error-msg">Senha incorreta. Tente novamente.</div>
+    <div id="err" class="error-box">Senha incorreta. Tente novamente.</div>
 
-    <div class="field-group">
+    <div class="field">
       <label>Senha</label>
-      <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+      <input type="password" id="pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
     </div>
 
-    <button class="btn-primary" onclick="doLogin()">Entrar no Sistema →</button>
+    <button class="btn-yellow" onclick="login()">Entrar no Sistema →</button>
 
-    <div class="login-footer" style="margin-top:24px;">FlashReport © 2026 · Todos os direitos reservados</div>
+    <div class="login-foot">FlashReport © 2026 · Todos os direitos reservados</div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════ APP ═══════════════════════════════ -->
+<!-- ══════════════════ APP ══════════════════ -->
 <div id="app-screen">
-
   <nav class="topbar">
-    <div class="topbar-logo">
+    <div class="topbar-brand">
       <div class="icon-sm">⚡</div>
       Flash<span>Report</span>
     </div>
-    <button class="btn-logout" onclick="doLogout()">Sair</button>
+    <button class="btn-ghost" onclick="logout()">Sair</button>
   </nav>
 
-  <div class="main-content">
-
-    <div class="section-title">Gerar <span>Relatório</span></div>
-    <div class="section-sub">Preencha os dados abaixo para gerar o relatório completo da campanha.</div>
+  <div class="page">
+    <div class="page-title">Gerar <span>Relatório</span></div>
+    <div class="page-sub">Preencha os dados abaixo para gerar o relatório completo da campanha.</div>
 
     <!-- IDENTIFICAÇÃO -->
-    <div class="form-card">
-      <div class="form-card-title">📋 Identificação</div>
-      <div class="form-grid-2">
-        <div class="field-group">
+    <div class="form-block">
+      <div class="block-title">📋 Identificação</div>
+      <div class="grid-2">
+        <div class="field">
           <label>Nome da Clínica</label>
           <input type="text" id="f-clinica" placeholder="Ex: Dra. Luísa Odontologia">
         </div>
-        <div class="field-group">
+        <div class="field">
           <label>Período de Referência</label>
           <input type="text" id="f-periodo" placeholder="Ex: Fevereiro - 2026">
         </div>
@@ -569,315 +454,224 @@
     </div>
 
     <!-- META ADS -->
-    <div class="form-card">
-      <div class="form-card-title">📊 Meta ADS — Dados do Gerenciador</div>
-      <div class="form-grid">
-        <div class="field-group">
+    <div class="form-block">
+      <div class="block-title">📊 Meta ADS — Dados do Gerenciador</div>
+      <div class="grid-5">
+        <div class="field">
           <label>Investimento (R$)</label>
-          <input type="number" id="f-investimento" placeholder="0,00" step="0.01">
+          <input type="number" id="f-inv" placeholder="0.00" step="0.01">
         </div>
-        <div class="field-group">
+        <div class="field">
           <label>Impressões</label>
-          <input type="number" id="f-impressoes" placeholder="0">
+          <input type="number" id="f-imp" placeholder="0">
         </div>
-        <div class="field-group">
+        <div class="field">
           <label>Alcance</label>
-          <input type="number" id="f-alcance" placeholder="0">
+          <input type="number" id="f-alc" placeholder="0">
         </div>
-        <div class="field-group">
+        <div class="field">
           <label>Cliques no Link</label>
-          <input type="number" id="f-cliques" placeholder="0">
+          <input type="number" id="f-cli" placeholder="0">
         </div>
-        <div class="field-group">
-          <label>Conversas no Gerenciador</label>
-          <input type="number" id="f-conversas" placeholder="0">
+        <div class="field">
+          <label>Conversas Gerenciador</label>
+          <input type="number" id="f-conv" placeholder="0">
         </div>
       </div>
     </div>
 
     <!-- AGENDAMENTO -->
-    <div class="form-card">
-      <div class="form-card-title">📅 Acompanhamento de Agendamento</div>
-      <div class="form-grid">
-        <div class="field-group">
+    <div class="form-block">
+      <div class="block-title">📅 Acompanhamento de Agendamento</div>
+      <div class="grid-5">
+        <div class="field">
           <label>Leads Recebidos</label>
           <input type="number" id="f-leads" placeholder="0">
         </div>
-        <div class="field-group">
-          <label>Agendamentos Marcados</label>
-          <input type="number" id="f-agendamentos" placeholder="0">
+        <div class="field">
+          <label>Agend. Marcados</label>
+          <input type="number" id="f-agend" placeholder="0">
         </div>
-        <div class="field-group">
+        <div class="field">
           <label>Consultas Realizadas</label>
-          <input type="number" id="f-consultas" placeholder="0">
+          <input type="number" id="f-cons" placeholder="0">
         </div>
-        <div class="field-group">
-          <label>Procedimentos Vendidos</label>
-          <input type="number" id="f-vendidos" placeholder="0">
+        <div class="field">
+          <label>Proced. Vendidos</label>
+          <input type="number" id="f-vend" placeholder="0">
         </div>
-        <div class="field-group">
-          <label>Valor Total em Vendas (R$)</label>
-          <input type="number" id="f-vendas" placeholder="0,00" step="0.01">
+        <div class="field">
+          <label>Valor em Vendas (R$)</label>
+          <input type="number" id="f-val" placeholder="0.00" step="0.01">
         </div>
       </div>
     </div>
 
-    <button class="btn-generate" onclick="gerarRelatorio()">⚡ Gerar Relatório</button>
-    <button class="btn-reset" onclick="limparFormulario()">Limpar campos</button>
+    <button class="btn-generate" onclick="gerar()">⚡ Gerar Relatório</button>
+    <button class="btn-clear" onclick="limpar()">Limpar campos</button>
 
-    <!-- RELATÓRIO GERADO -->
-    <div id="report-section">
+    <!-- RELATÓRIO -->
+    <div id="report-wrap">
+      <div class="report-divider"><span>Relatório <em>Gerado</em></span></div>
 
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
-        <div>
-          <div class="section-title">Relatório <span>Gerado</span></div>
-          <div class="section-sub" style="margin-bottom:0">Pronto para apresentar ao cliente.</div>
-        </div>
-      </div>
+      <div class="report-box slide-in">
+        <div class="report-body">
 
-      <div class="report-wrap anim-in">
-        <div class="report-inner">
-
-          <!-- HEADER -->
-          <div class="report-header">
+          <div class="report-head">
             <h2>Resumo de Acompanhamento Mensal</h2>
-            <div class="report-top-badges">
-              <div class="badge-top">
-                <div class="badge-label">Período</div>
-                <div class="badge-value" id="r-periodo">—</div>
+            <div class="head-badges">
+              <div class="badge-pill">
+                <div class="bp-label">Período</div>
+                <div class="bp-val" id="r-periodo">—</div>
               </div>
-              <div class="badge-top">
-                <div class="badge-label">Clínica</div>
-                <div class="badge-value" id="r-clinica">—</div>
+              <div class="badge-pill">
+                <div class="bp-label">Clínica</div>
+                <div class="bp-val" id="r-clinica">—</div>
               </div>
-              <div class="badge-top">
-                <div class="badge-label">Investimento Total</div>
-                <div class="badge-value" id="r-investimento">—</div>
+              <div class="badge-pill">
+                <div class="bp-label">Investimento Total</div>
+                <div class="bp-val" id="r-inv">—</div>
               </div>
             </div>
           </div>
 
-          <!-- 3 COLUNAS -->
           <div class="report-cols">
-
-            <!-- COL 1: META ADS -->
+            <!-- COL 1 -->
             <div>
-              <div class="report-col-title">Meta Ads Métricas</div>
-              <div class="report-metric-card">
-                <div class="m-label">Impressões</div>
-                <div class="m-value" id="r-impressoes">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Alcance</div>
-                <div class="m-value" id="r-alcance">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Cliques no Link</div>
-                <div class="m-value" id="r-cliques">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Conversas Gerenciador</div>
-                <div class="m-value" id="r-conversas">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Custo Médio por Conversa</div>
-                <div class="m-value" id="r-custo-conversa">—</div>
-              </div>
+              <div class="col-head">Meta Ads Métricas</div>
+              <div class="metric-card"><div class="mc-label">Impressões</div><div class="mc-val" id="r-imp">—</div></div>
+              <div class="metric-card"><div class="mc-label">Alcance</div><div class="mc-val" id="r-alc">—</div></div>
+              <div class="metric-card"><div class="mc-label">Cliques no Link</div><div class="mc-val" id="r-cli">—</div></div>
+              <div class="metric-card"><div class="mc-label">Conversas Gerenciador</div><div class="mc-val" id="r-conv">—</div></div>
+              <div class="metric-card"><div class="mc-label">Custo Médio por Conversa</div><div class="mc-val" id="r-cmc">—</div></div>
             </div>
-
-            <!-- COL 2: AGENDAMENTO -->
+            <!-- COL 2 -->
             <div>
-              <div class="report-col-title">Acompanhamento de Agendamento</div>
-              <div class="report-metric-card">
-                <div class="m-label">Leads Recebidos</div>
-                <div class="m-value" id="r-leads">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Agendamentos Marcados</div>
-                <div class="m-value" id="r-agendamentos">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Consultas Realizadas</div>
-                <div class="m-value" id="r-consultas">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Procedimentos Vendidos</div>
-                <div class="m-value" id="r-vendidos">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Valor em Vendas</div>
-                <div class="m-value" id="r-vendas">—</div>
-              </div>
+              <div class="col-head">Acompanhamento de Agendamento</div>
+              <div class="metric-card"><div class="mc-label">Leads Recebidos</div><div class="mc-val" id="r-leads">—</div></div>
+              <div class="metric-card"><div class="mc-label">Agendamentos Marcados</div><div class="mc-val" id="r-agend">—</div></div>
+              <div class="metric-card"><div class="mc-label">Consultas Realizadas</div><div class="mc-val" id="r-cons">—</div></div>
+              <div class="metric-card"><div class="mc-label">Procedimentos Vendidos</div><div class="mc-val" id="r-vend">—</div></div>
+              <div class="metric-card"><div class="mc-label">Valor em Vendas</div><div class="mc-val" id="r-val">—</div></div>
             </div>
-
-            <!-- COL 3: INDICADORES -->
+            <!-- COL 3 -->
             <div>
-              <div class="report-col-title">Indicadores Estratégicos</div>
-              <div class="report-metric-card">
-                <div class="m-label">Taxa de Agendamento</div>
-                <div class="m-value" id="r-tx-agendamento">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Taxa de Comparecimento</div>
-                <div class="m-value" id="r-tx-comparecimento">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Taxa de Conversão</div>
-                <div class="m-value" id="r-tx-conversao">—</div>
-              </div>
-              <div class="report-metric-card">
-                <div class="m-label">Ticket Médio</div>
-                <div class="m-value" id="r-ticket">—</div>
-              </div>
-            </div>
-
-          </div><!-- /cols -->
-
-          <!-- RODAPÉ -->
-          <div class="report-footer">
-            <div class="footer-card">
-              <div class="f-label">Retorno Sobre Investimento</div>
-              <div class="f-value" id="r-roi">—</div>
-            </div>
-            <div class="footer-card">
-              <div class="f-label">Custo por Agendamento</div>
-              <div class="f-value" id="r-cpa">—</div>
-            </div>
-            <div class="footer-card">
-              <div class="f-label">Custo por Comparecimento</div>
-              <div class="f-value" id="r-cpc">—</div>
-            </div>
-            <div class="footer-card">
-              <div class="f-label">Custo por Aquisição de Clientes</div>
-              <div class="f-value" id="r-cac">—</div>
+              <div class="col-head">Indicadores Estratégicos</div>
+              <div class="metric-card"><div class="mc-label">Taxa de Agendamento</div><div class="mc-val" id="r-ta">—</div></div>
+              <div class="metric-card"><div class="mc-label">Taxa de Comparecimento</div><div class="mc-val" id="r-tc">—</div></div>
+              <div class="metric-card"><div class="mc-label">Taxa de Conversão</div><div class="mc-val" id="r-tv">—</div></div>
+              <div class="metric-card"><div class="mc-label">Ticket Médio</div><div class="mc-val" id="r-tm">—</div></div>
             </div>
           </div>
 
-        </div><!-- /report-inner -->
+          <div class="report-footer-row">
+            <div class="footer-metric"><div class="fm-label">Retorno Sobre Investimento</div><div class="fm-val" id="r-roi">—</div></div>
+            <div class="footer-metric"><div class="fm-label">Custo por Agendamento</div><div class="fm-val" id="r-cpa">—</div></div>
+            <div class="footer-metric"><div class="fm-label">Custo por Comparecimento</div><div class="fm-val" id="r-cpc">—</div></div>
+            <div class="footer-metric"><div class="fm-label">Custo por Aquisição de Clientes</div><div class="fm-val" id="r-cac">—</div></div>
+          </div>
+
+        </div>
 
         <div class="report-actions">
           <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
-          <button class="btn-new" onclick="novoRelatorio()">+ Novo Relatório</button>
+          <button class="btn-new-report" onclick="novo()">+ Novo Relatório</button>
         </div>
-      </div><!-- /report-wrap -->
+      </div>
+    </div>
 
-    </div><!-- /report-section -->
-
-  </div><!-- /main-content -->
-</div><!-- /app-screen -->
+  </div>
+</div>
 
 <script>
-  // ── AUTH
-  const SENHA = 'admin123';
+  const PASS = 'admin123';
 
-  function doLogin() {
-    const pw = document.getElementById('login-password').value;
-    const err = document.getElementById('login-error');
-    if (pw === SENHA) {
+  function login() {
+    const v = document.getElementById('pw').value;
+    if (v === PASS) {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('app-screen').style.display = 'block';
-      err.style.display = 'none';
+      document.getElementById('err').style.display = 'none';
     } else {
-      err.style.display = 'block';
-      document.getElementById('login-password').value = '';
-      document.getElementById('login-password').focus();
+      document.getElementById('err').style.display = 'block';
+      document.getElementById('pw').value = '';
+      document.getElementById('pw').focus();
     }
   }
 
-  function doLogout() {
+  function logout() {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
-    document.getElementById('login-password').value = '';
-    document.getElementById('report-section').style.display = 'none';
+    document.getElementById('pw').value = '';
+    limpar();
   }
 
-  // ── UTILS
-  function brl(val) {
-    return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
+  const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const pct = v => v.toFixed(2).replace('.', ',') + '%';
+  const fmt = v => v.toLocaleString('pt-BR');
+  const g   = id => parseFloat(document.getElementById(id).value) || 0;
+  const set = (id, v) => document.getElementById(id).textContent = v;
 
-  function pct(val) {
-    return val.toFixed(2).replace('.', ',') + '%';
-  }
+  function gerar() {
+    const clinica = document.getElementById('f-clinica').value.trim() || 'Clínica';
+    const periodo = document.getElementById('f-periodo').value.trim() || '—';
+    const inv  = g('f-inv');
+    const imp  = g('f-imp');
+    const alc  = g('f-alc');
+    const cli  = g('f-cli');
+    const conv = g('f-conv');
+    const leads = g('f-leads');
+    const agend = g('f-agend');
+    const cons  = g('f-cons');
+    const vend  = g('f-vend');
+    const val   = g('f-val');
 
-  function num(val) {
-    return val.toLocaleString('pt-BR');
-  }
+    const cmc  = conv  > 0 ? inv / conv  : 0;
+    const ta   = leads > 0 ? (agend / leads) * 100 : 0;
+    const tc   = agend > 0 ? (cons / agend) * 100   : 0;
+    const tv   = cons  > 0 ? (vend / cons) * 100     : 0;
+    const tm   = vend  > 0 ? val / vend              : 0;
+    const cpa  = agend > 0 ? inv / agend             : 0;
+    const cpc  = cons  > 0 ? inv / cons              : 0;
+    const cac  = vend  > 0 ? inv / vend              : 0;
+    const roi  = inv   > 0 ? val / inv               : 0;
 
-  function g(id) {
-    return parseFloat(document.getElementById(id).value) || 0;
-  }
-
-  function set(id, val) {
-    document.getElementById(id).textContent = val;
-  }
-
-  // ── GERAR RELATÓRIO
-  function gerarRelatorio() {
-    const clinica      = document.getElementById('f-clinica').value.trim() || 'Clínica';
-    const periodo      = document.getElementById('f-periodo').value.trim() || '—';
-    const investimento = g('f-investimento');
-    const impressoes   = g('f-impressoes');
-    const alcance      = g('f-alcance');
-    const cliques      = g('f-cliques');
-    const conversas    = g('f-conversas');
-    const leads        = g('f-leads');
-    const agendamentos = g('f-agendamentos');
-    const consultas    = g('f-consultas');
-    const vendidos     = g('f-vendidos');
-    const vendas       = g('f-vendas');
-
-    // Cálculos
-    const custoConversa     = conversas > 0 ? investimento / conversas : 0;
-    const txAgendamento     = leads > 0 ? (agendamentos / leads) * 100 : 0;
-    const txComparecimento  = agendamentos > 0 ? (consultas / agendamentos) * 100 : 0;
-    const txConversao       = consultas > 0 ? (vendidos / consultas) * 100 : 0;
-    const ticketMedio       = vendidos > 0 ? vendas / vendidos : 0;
-    const custoAgendamento  = agendamentos > 0 ? investimento / agendamentos : 0;
-    const custoComparecimento = consultas > 0 ? investimento / consultas : 0;
-    const cac               = vendidos > 0 ? investimento / vendidos : 0;
-    const roi               = investimento > 0 ? vendas / investimento : 0;
-
-    // Preenche relatório
     set('r-periodo', periodo);
     set('r-clinica', clinica);
-    set('r-investimento', brl(investimento));
-    set('r-impressoes', num(impressoes));
-    set('r-alcance', num(alcance));
-    set('r-cliques', num(cliques));
-    set('r-conversas', num(conversas));
-    set('r-custo-conversa', brl(custoConversa));
-    set('r-leads', num(leads));
-    set('r-agendamentos', num(agendamentos));
-    set('r-consultas', num(consultas));
-    set('r-vendidos', num(vendidos));
-    set('r-vendas', brl(vendas));
-    set('r-tx-agendamento', pct(txAgendamento));
-    set('r-tx-comparecimento', pct(txComparecimento));
-    set('r-tx-conversao', pct(txConversao));
-    set('r-ticket', brl(ticketMedio));
+    set('r-inv',  brl(inv));
+    set('r-imp',  fmt(imp));
+    set('r-alc',  fmt(alc));
+    set('r-cli',  fmt(cli));
+    set('r-conv', fmt(conv));
+    set('r-cmc',  brl(cmc));
+    set('r-leads', fmt(leads));
+    set('r-agend', fmt(agend));
+    set('r-cons',  fmt(cons));
+    set('r-vend',  fmt(vend));
+    set('r-val',   brl(val));
+    set('r-ta',  pct(ta));
+    set('r-tc',  pct(tc));
+    set('r-tv',  pct(tv));
+    set('r-tm',  brl(tm));
     set('r-roi', roi.toFixed(0) + 'x');
-    set('r-cpa', brl(custoAgendamento));
-    set('r-cpc', brl(custoComparecimento));
+    set('r-cpa', brl(cpa));
+    set('r-cpc', brl(cpc));
     set('r-cac', brl(cac));
 
-    // Exibe
-    const section = document.getElementById('report-section');
-    section.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const wrap = document.getElementById('report-wrap');
+    wrap.style.display = 'block';
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function limparFormulario() {
-    const inputs = document.querySelectorAll('#app-screen input');
-    inputs.forEach(i => i.value = '');
-    document.getElementById('report-section').style.display = 'none';
+  function limpar() {
+    document.querySelectorAll('#app-screen input').forEach(i => i.value = '');
+    document.getElementById('report-wrap').style.display = 'none';
   }
 
-  function novoRelatorio() {
-    limparFormulario();
+  function novo() {
+    limpar();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
-
 </body>
 </html>
