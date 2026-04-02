@@ -214,8 +214,17 @@
   .grid-5 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
   /* Cards com altura igual dentro das colunas do relatório */
-  .report-cols > div { display: flex; flex-direction: column; }
-  .metric-card { flex: 1; }
+  .report-cols > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .metric-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   .divider { height: 1px; background: var(--border-dim); margin: 20px 0; }
 
@@ -740,6 +749,7 @@
               <div class="metric-card"><div class="mc-label">Taxa de Comparecimento</div><div class="mc-val" id="r-tc">—</div></div>
               <div class="metric-card"><div class="mc-label">Taxa de Conversão</div><div class="mc-val" id="r-tv">—</div></div>
               <div class="metric-card"><div class="mc-label">Ticket Médio</div><div class="mc-val" id="r-tm">—</div></div>
+              <div class="metric-card" style="visibility:hidden;"></div>
             </div>
           </div>
 
