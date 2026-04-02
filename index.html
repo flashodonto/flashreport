@@ -459,7 +459,7 @@
       <div class="grid-3">
         <div class="field">
           <label>Investimento (R$)</label>
-          <input type="number" id="f-inv" placeholder="0.00" step="0.01">
+          <input type="text" id="f-inv" placeholder="0,00" inputmode="decimal">
         </div>
         <div class="field">
           <label>Impressões</label>
@@ -479,7 +479,7 @@
         </div>
         <div class="field">
           <label>Custo Médio por Conversa (R$)</label>
-          <input type="number" id="f-cmc" placeholder="0.00" step="0.01">
+          <input type="text" id="f-cmc" placeholder="0,00" inputmode="decimal">
         </div>
       </div>
     </div>
@@ -506,7 +506,7 @@
         </div>
         <div class="field">
           <label>Valor em Vendas (R$)</label>
-          <input type="number" id="f-val" placeholder="0.00" step="0.01">
+          <input type="text" id="f-val" placeholder="0,00" inputmode="decimal">
         </div>
       </div>
     </div>
@@ -614,22 +614,30 @@
   const pct = v => v.toFixed(2).replace('.', ',') + '%';
   const fmt = v => v.toLocaleString('pt-BR');
   const g   = id => parseFloat(document.getElementById(id).value) || 0;
+  const gBrl = id => {
+    // Accepts: 58.870,00 | 58870,00 | 58870.00 | 58870 | 1.500,50
+    let v = document.getElementById(id).value.trim();
+    if (!v) return 0;
+    // Remove pontos de milhar, troca vírgula decimal por ponto
+    v = v.replace(/\./g, '').replace(',', '.');
+    return parseFloat(v) || 0;
+  };
   const set = (id, v) => document.getElementById(id).textContent = v;
 
   function gerar() {
     const clinica = document.getElementById('f-clinica').value.trim() || 'Clínica';
     const periodo = document.getElementById('f-periodo').value.trim() || '—';
-    const inv  = g('f-inv');
+    const inv  = gBrl('f-inv');
     const imp  = g('f-imp');
     const alc  = g('f-alc');
     const cli  = g('f-cli');
     const conv = g('f-conv');
-    const cmc  = g('f-cmc');
+    const cmc  = gBrl('f-cmc');
     const leads = g('f-leads');
     const agend = g('f-agend');
     const cons  = g('f-cons');
     const vend  = g('f-vend');
-    const val   = g('f-val');
+    const val   = gBrl('f-val');
 
     const ta   = leads > 0 ? (agend / leads) * 100 : 0;
     const tc   = agend > 0 ? (cons / agend) * 100   : 0;
