@@ -211,7 +211,11 @@
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+  /* Cards com altura igual dentro das colunas do relatório */
+  .report-cols > div { display: flex; flex-direction: column; }
+  .metric-card { flex: 1; }
 
   .divider { height: 1px; background: var(--border-dim); margin: 20px 0; }
 
@@ -395,9 +399,7 @@
 
     #app-screen {
       background: #111 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      min-height: 100vh !important;
+      display: block !important;
     }
 
     .topbar, .page-title, .page-sub, .form-block,
@@ -408,11 +410,11 @@
     .page {
       padding: 0 !important;
       max-width: 100% !important;
-      flex: 1 !important;
+      background: #111 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      background: #111 !important;
+      min-height: 100vh !important;
     }
 
     #report-wrap {
@@ -630,21 +632,23 @@
     <!-- AGENDAMENTO -->
     <div class="form-block">
       <div class="block-title">📅 Acompanhamento de Agendamento</div>
-      <div class="grid-5">
+      <div class="grid-3" style="margin-bottom:12px;">
         <div class="field">
           <label>Leads Recebidos</label>
           <input type="number" id="f-leads" placeholder="0">
         </div>
         <div class="field">
-          <label>Agend. Marcados</label>
+          <label>Agendamentos Marcados</label>
           <input type="number" id="f-agend" placeholder="0">
         </div>
         <div class="field">
           <label>Consultas Realizadas</label>
           <input type="number" id="f-cons" placeholder="0">
         </div>
+      </div>
+      <div class="grid-2">
         <div class="field">
-          <label>Proced. Vendidos</label>
+          <label>Procedimentos Vendidos</label>
           <input type="number" id="f-vend" placeholder="0">
         </div>
         <div class="field">
