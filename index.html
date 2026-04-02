@@ -386,10 +386,18 @@
       color-adjust: exact !important;
     }
 
-    html, body, #app-screen, .page {
+    html, body {
       background: #111 !important;
       background-color: #111 !important;
       width: 100% !important;
+      height: 100% !important;
+    }
+
+    #app-screen {
+      background: #111 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100vh !important;
     }
 
     .topbar, .page-title, .page-sub, .form-block,
@@ -397,12 +405,21 @@
       display: none !important;
     }
 
-    #report-wrap {
-      display: block !important;
-      margin-top: 0 !important;
+    .page {
+      padding: 0 !important;
+      max-width: 100% !important;
+      flex: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #111 !important;
     }
 
-    .page { padding: 0 !important; max-width: 100% !important; }
+    #report-wrap {
+      display: block !important;
+      margin: 0 !important;
+      width: 100% !important;
+    }
 
     .report-box {
       background: #111 !important;
@@ -415,15 +432,15 @@
 
     .report-body {
       background: #111 !important;
-      padding: 10px 14px 8px !important;
+      padding: 20px 20px 16px !important;
       width: 100% !important;
     }
 
     /* HEADER */
-    .report-head { margin-bottom: 10px !important; }
+    .report-head { margin-bottom: 16px !important; }
     .report-head h2 {
-      font-size: 16px !important;
-      margin-bottom: 8px !important;
+      font-size: 18px !important;
+      margin-bottom: 12px !important;
       color: #FFD600 !important;
     }
 
@@ -431,53 +448,53 @@
       display: flex !important;
       flex-direction: row !important;
       justify-content: center !important;
-      gap: 8px !important;
+      gap: 12px !important;
       flex-wrap: nowrap !important;
     }
     .badge-pill {
       background: #FFD600 !important;
-      padding: 6px 14px !important;
-      min-width: 130px !important;
-      border-radius: 8px !important;
+      padding: 10px 18px !important;
+      min-width: 150px !important;
+      border-radius: 10px !important;
     }
-    .badge-pill .bp-label { font-size: 8px !important; color: #111 !important; }
-    .badge-pill .bp-val { font-size: 12px !important; color: #111 !important; }
+    .badge-pill .bp-label { font-size: 9px !important; color: #111 !important; }
+    .badge-pill .bp-val { font-size: 14px !important; color: #111 !important; }
 
     /* 3 COLUNAS — forçar grid lado a lado */
     .report-cols {
       display: grid !important;
       grid-template-columns: 1fr 1fr 1fr !important;
-      gap: 10px !important;
-      margin-bottom: 10px !important;
+      gap: 14px !important;
+      margin-bottom: 14px !important;
       width: 100% !important;
     }
 
     .col-head {
       background: #FFD600 !important;
       color: #111 !important;
-      padding: 5px 8px !important;
-      font-size: 9px !important;
-      margin-bottom: 5px !important;
-      border-radius: 6px !important;
+      padding: 7px 10px !important;
+      font-size: 10px !important;
+      margin-bottom: 8px !important;
+      border-radius: 7px !important;
       text-align: center !important;
     }
 
     .metric-card {
       background: #191919 !important;
       border: 1px solid rgba(255,255,255,0.08) !important;
-      padding: 5px 8px !important;
-      margin-bottom: 3px !important;
-      border-radius: 6px !important;
+      padding: 8px 10px !important;
+      margin-bottom: 5px !important;
+      border-radius: 7px !important;
       text-align: center !important;
     }
     .metric-card .mc-label {
-      font-size: 7px !important;
+      font-size: 8px !important;
       color: #888 !important;
-      margin-bottom: 1px !important;
+      margin-bottom: 3px !important;
       text-transform: uppercase !important;
     }
     .metric-card .mc-val {
-      font-size: 12px !important;
+      font-size: 13px !important;
       color: #fff !important;
       font-weight: 700 !important;
     }
@@ -486,25 +503,25 @@
     .report-footer-row {
       display: grid !important;
       grid-template-columns: repeat(4, 1fr) !important;
-      gap: 8px !important;
-      padding-top: 8px !important;
+      gap: 10px !important;
+      padding-top: 12px !important;
       border-top: 1px solid rgba(255,255,255,0.06) !important;
     }
     .footer-metric {
       background: #191919 !important;
       border: 1px solid rgba(255,214,0,0.15) !important;
-      padding: 7px 8px !important;
+      padding: 10px !important;
       border-radius: 8px !important;
       text-align: center !important;
     }
     .footer-metric .fm-label {
-      font-size: 7px !important;
+      font-size: 8px !important;
       color: #888 !important;
-      margin-bottom: 3px !important;
+      margin-bottom: 4px !important;
       text-transform: uppercase !important;
     }
     .footer-metric .fm-val {
-      font-size: 13px !important;
+      font-size: 15px !important;
       color: #FFD600 !important;
       font-weight: 800 !important;
     }
